@@ -1,0 +1,15 @@
+image: registry.gitlab.com/gbraad/docugen:latest
+
+pages:
+  script:
+  - pandoc -V geometry:margin=1in -o deploying-Kubernetes-on-OpenStack.pdf ./deployment/README.md
+  - pandoc -t html5 --template template/index-template.html --standalone -o deploying-Kubernetes-on-OpenStack.html ./deployment/README.md
+  - pandoc -t html5 -f markdown-citations --template template/index-template.html --standalone -o index.html ./index.md
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
