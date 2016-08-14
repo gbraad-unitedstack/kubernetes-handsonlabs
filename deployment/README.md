@@ -5,7 +5,8 @@ Deployment of Kubernetes on OpenStack
 Prepare OpenStack environment
 -----------------------------
 
-### install openstack client
+
+### Install OpenStack client
 
 ```
 $ sudo dnf install -y python-openstackclient
@@ -16,7 +17,7 @@ $ sudo pip install python-openstackclient
 ```
 
 
-### create clouds.yaml file
+### Create `clouds.yaml` file
 
 ```
 $ vi ~/.config/openstack/clouds.yaml
@@ -24,7 +25,7 @@ $ vi ~/.config/openstack/clouds.yaml
 
 ```
 clouds:
-  dream:
+  dreamhost:
     auth:
       auth_url: https://iad2.dream.io:5000/v2.0
       project_name: [projectname]
@@ -41,7 +42,7 @@ $ openstack --os-cloud dreamhost server list
 ```
 
 
-### download centos atomic image
+### Download CentOS Atomic image
 
 ```
 $ wget -q http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7-GenericCloud.qcow2.gz -O CentOS7-Atomic.qcow2.gz
@@ -49,7 +50,7 @@ $ gunzip CentOS7-Atomic.qcow2.gz
 ```
 
 
-### convert image
+### Convert image
 
 ```
 $ dnf install -y qemu-tools
@@ -61,13 +62,13 @@ $ qemu-img convert /tmp/centos7.qcow2 CentOS7-Atomic.raw
 ```
 
 
-### upload image
+### Upload image
 
 ```
 $ openstack --os-cloud dreamhost image create "CentOS7-Atomic" --disk-format raw --container-format bare --file CentOS7-Atomic.raw --property os_distro=centos
 ```
 
-### install ansible
+### Install ansible
 
 ```
 $ sudo dnf install -y ansible
@@ -78,7 +79,7 @@ $ sudo pip install ansible
 ```
 
 
-### install shade library
+### Install shade library
 
 ```
 $ sudo pip install shade
@@ -158,7 +159,7 @@ $ git clone https://github.com/gbraad/ansible-playbook-kubernetes.git
 ```
 
 
-### playbook deploy kubernetes
+### Deploy kubernetes
 
 ```
 $ openstack --os-cloud dreamhost server list
@@ -173,7 +174,7 @@ $ ansible-playbook -i hosts deploy-kubernetes.yml
 ```
 
 
-### install kubernetes client
+### Install kubernetes client
 
 ```
 $ dnf install -y kubernetes-client
