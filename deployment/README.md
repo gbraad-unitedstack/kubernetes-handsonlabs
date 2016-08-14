@@ -11,7 +11,6 @@ Prepare OpenStack environment
 $ sudo dnf install -y python-openstackclient
 ```
 
-
 ```
 $ sudo pip install python-openstackclient
 ```
@@ -186,6 +185,16 @@ $ chmod +x kubectl
 ```
 
 
+### Test
+
 ```
 $ kubectl --server=[master ip]]:8080 get nodes
+```
+
+```
+$ kubectl --server=[master ip]]:8080 run nginx
+```
+
+```
+$ kubectl --server=[master ip]]:8080 get pods
 ```
